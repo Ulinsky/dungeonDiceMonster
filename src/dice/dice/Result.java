@@ -1,5 +1,11 @@
-package dice;
+package dice.dice;
 
+import dice.dice.Piercing;
+import dice.dice.Side;
+import dice.dice.Shielding;
+import dice.dice.Healing;
+import dice.dice.Crit;
+import dice.dice.Attack;
 import java.util.List;
 
 public class Result {

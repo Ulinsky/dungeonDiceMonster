@@ -1,5 +1,7 @@
-package dice;
+package dice.enemy;
 
+import dice.player.Inventory;
+import dice.dice.Dice;
 import java.util.List;
 
 public abstract class Enemy {

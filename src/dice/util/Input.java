@@ -29,7 +29,7 @@
  * 
  * last update: 2015-11-03 Michael Haslgr�bler
  */
-package ticketing2;
+package dice.util;
 import java.io.IOException;
 import java.io.InputStream;
 

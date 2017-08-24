@@ -1,4 +1,6 @@
-package dice;
+package dice.dice;
+
+import dice.dice.Side;
 
 public class Piercing extends Side{
 

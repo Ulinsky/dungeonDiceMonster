@@ -1,4 +1,4 @@
-package dice;
+package dice.dice;
 
 public class Shielding extends Side {
 

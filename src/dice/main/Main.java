@@ -1,5 +1,13 @@
-package dice;
+package dice.main;
 
+import dice.dice.Attack;
+import dice.dice.Crit;
+import dice.dice.Dice;
+import dice.dice.Healing;
+import dice.dice.Piercing;
+import dice.player.Player;
+import dice.dice.Shielding;
+import dice.dice.Side;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

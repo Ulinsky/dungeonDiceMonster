@@ -1,4 +1,4 @@
-package dice;
+package dice.dice;
 
 public class Attack extends Side{
 
