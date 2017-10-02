@@ -1,6 +1,7 @@
-package dice.player;
+package player;
 
-import dice.dice.Dice;
+import dice.Dice;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

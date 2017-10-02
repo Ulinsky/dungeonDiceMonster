@@ -1,8 +1,9 @@
-package dice.player;
+package player;
 
-import dice.dice.Result;
-import dice.dice.Side;
-import dice.dice.Dice;
+import dice.Dice;
+import dice.Result;
+import dice.Side;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -74,6 +75,10 @@ public class Player {
         return dice;
     }
 
+    public List<Dice> getHand() {
+        return hand;
+    }
+
     public void drawDice() {
         Random rnd = new Random();
         shuffleDice();
@@ -84,15 +89,9 @@ public class Player {
             });
         }
         for (int i = 0; i < 5; i++) {
-//            System.out.println("ENTERED FOR LOOP");
             int draw = rnd.nextInt(dice.size());
-//            System.out.println("DRAW NUMBER IS: "+draw);
-
             Dice singleDice = dice.get(draw);
-            //     System.out.println("DICE IS " + singleDice);
-//            System.out.println("ADDING DICE");
             hand.add(singleDice);
-//            System.out.println("FINISHED ADD");
             removeDice(singleDice);
         }
     }
@@ -108,7 +107,7 @@ public class Player {
         });
         return sb.toString();
     }
-    
+
     public String printHand() {
         StringBuilder sb = new StringBuilder("\n");
         hand.forEach((d) -> {
@@ -121,12 +120,8 @@ public class Player {
         this.name = name;
     }
 
-    public Result roll(List<Dice> dice) {
-        List<Side> results = new ArrayList<>();
-        dice.forEach((Dice d) -> {
-            results.add(d.roll());
-        });
-        return new Result(results);
+    public Result roll(List<Side> sides) {
+        return new Result(sides);
     }
 
     @Override
