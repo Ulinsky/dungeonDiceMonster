@@ -35,6 +35,14 @@ public abstract class Enemy {
         return hp;
     }
 
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setShield(int shield) {
+        this.shield = shield;
+    }
+
     public int getShield() {
         return shield;
     }

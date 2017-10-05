@@ -30,7 +30,7 @@ public class Result implements Visitor {
     }
 
     public int getDamage() {
-        return crit ? damage : damage * 2;
+        return crit ? damage * 2 : damage;
     }
 
     public int getHealing() {
@@ -43,7 +43,7 @@ public class Result implements Visitor {
 
     @Override
     public String toString() {
-        return String.format("\nA dice with %s damage,%s healing %s shielding, %s and %s", damage, healing, shield, crit ? "crit" : "no crit", piercing ? "pierce." : "no pierce.");
+        return String.format("\nA dice with %s damage,%s healing %s shielding, %s and %s", getDamage(), healing, shield, crit ? "crit" : "no crit", piercing ? "pierce." : "no pierce.");
     }
 
     @Override
