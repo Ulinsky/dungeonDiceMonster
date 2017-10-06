@@ -140,6 +140,7 @@ public class Player {
 
     public String printHand() {
         StringBuilder sb = new StringBuilder("\n");
+        // TODO: 10/6/2017 Bolja imena za varijable da se lakse cita
         hand.forEach((d) -> {
             sb.append(d.toString()).append("\n");
         });
@@ -158,12 +159,16 @@ public class Player {
         for (int i = 0; i < 3; i++) {
             sides.add(selectedDice.get(i).getSides().get(rnd.nextInt(6)));
         }
+
+        // TODO: 10/6/2017 AA: Ovdje "Result result = new Result(); foreach side.accept(result)...
         return new Result(sides);
     }
 
     @Override
     public String toString() {
-        return String.format("%s with %s hp, %s armor and %s in hand", name, hp, shield, hand.isEmpty() ? "no dice" : printHand());
+        // TODO: 10/6/2017 Ne znam jel dobro ime za varijablu, ne kontam bas sta je  
+        String hand = this.hand.isEmpty() ? "no dice" : printHand();
+        return String.format("%s with %s hp, %s armor and %s in hand", name, hp, shield, hand);
     }
 
 }

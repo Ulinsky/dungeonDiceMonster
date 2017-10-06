@@ -15,6 +15,7 @@ public class Result implements Visitor {
 
 
     public Result(List<Side> sides) {
+        // TODO: 10/6/2017 Kod da visitable accepta visitor ne bi trebao biti u visitoru vec van. Tako da ti ne treba constructor nikako
         for (Side s : sides) {
             s.accept(this);
         }
