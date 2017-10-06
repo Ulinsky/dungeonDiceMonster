@@ -37,16 +37,21 @@ public class Player {
 
     private Side generateNewSide() {
 
-        switch (rnd.nextInt(5)) {
+        switch (rnd.nextInt(10)) {
             case 0:
-                return new Attack(rnd.nextInt(7) + 1);
             case 1:
-                return new Crit();
             case 2:
-                return new Healing(rnd.nextInt(7) + 1);
             case 3:
-                return new Piercing();
+            case 9:
+                return new Attack(rnd.nextInt(4) + 1);
             case 4:
+                return new Crit();
+            case 5:
+                return new Healing(rnd.nextInt(7) + 1);
+            case 6:
+                return new Piercing();
+            case 7:
+            case 8:
                 return new Shielding(rnd.nextInt(4) + 1);
             default:
                 return null;
@@ -160,13 +165,18 @@ public class Player {
             sides.add(selectedDice.get(i).getSides().get(rnd.nextInt(6)));
         }
 
+        System.out.println("Printing sides");
+        for (Side s : sides) {
+            System.out.println(String.format("%s :%s", s.getDesc(), s.getValue() == -1 ? " " : s.getValue()));
+        }
+
         // TODO: 10/6/2017 AA: Ovdje "Result result = new Result(); foreach side.accept(result)...
         return new Result(sides);
     }
 
     @Override
     public String toString() {
-        // TODO: 10/6/2017 Ne znam jel dobro ime za varijablu, ne kontam bas sta je  
+        // TODO: 10/6/2017 Ne znam jel dobro ime za varijablu, ne kontam bas sta je
         String hand = this.hand.isEmpty() ? "no dice" : printHand();
         return String.format("%s with %s hp, %s armor and %s in hand", name, hp, shield, hand);
     }

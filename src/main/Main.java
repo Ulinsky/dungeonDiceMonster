@@ -1,7 +1,11 @@
 package main;
 
 import dice.Dice;
+import encounter.Encounter;
+import entity.enemy.Enemy;
+import entity.enemy.Skeleton;
 import entity.player.Player;
+import result.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,16 +18,22 @@ public class Main {
         player.setName("Ulinsky");
         player.drawDice();
         System.out.println(player);
-        /*Enemy skeleton = new Skeleton();
+        Enemy skeleton = new Skeleton();
         skeleton.drawDice();
-        System.out.println(skeleton);*/
-        int[] numbers = new Random().ints(0, 6).distinct().limit(3).toArray();
-        List<Dice> selectedDice = new ArrayList<>();
-        for (int n : numbers) {
-            selectedDice.add(player.getDice().get(n));
+        System.out.println(skeleton);
+        for (int i = 0; i < 5; i++) {
+            System.out.println(i + " RUN\n=====================\n\n");
+            int[] numbers = new Random().ints(0, 6).distinct().limit(3).toArray();
+            List<Dice> selectedDice = new ArrayList<>();
+            for (int n : numbers) {
+                selectedDice.add(player.getDice().get(n));
+            }
+            Encounter e = new Encounter(player, skeleton);
+            Result test = player.roll(selectedDice);
+            System.out.println(test);
+            e.playerDealsDamage(test);
+            System.out.println(e.getEnemy());
         }
-        System.out.println(player.roll(selectedDice));
-
     }
 
 }
