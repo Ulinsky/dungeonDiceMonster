@@ -24,10 +24,8 @@ public class Dice {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        int i = 0;
         for (Side s : sides) {
-            i++;
-            sb.append(i).append(": ").append(s.getDesc()).append(" ").append(s.getValue() > 0 ? s.getValue() : "").append("\n");
+            sb.append(": ").append(s.getDesc()).append(" ").append(s.getValue() > 0 ? s.getValue() : "").append("\n");
         }
         return sb.toString();
     }

@@ -13,13 +13,9 @@ public class Encounter {
         this.player = player;
     }
 
-    public void playerDealsDamage(Result result) {
+    public void playerTakesTurn(Result result) {
         if (result.isPiercing()) {
             enemy.setHp(enemy.getHp() - result.getDamage());
-            if (enemy.getHp() <= 0) {
-                playerWins();
-                return;
-            }
         } else {
             int overflow = result.getDamage() - enemy.getShield();
             if (overflow > 0) {
@@ -29,10 +25,7 @@ public class Encounter {
                 enemy.setShield(enemy.getShield() - result.getDamage());
             }
         }
-        if (enemy.getHp() <= 0) {
-            playerWins();
-            return;
-        }
+
     }
 
     public Enemy getEnemy() {
@@ -43,13 +36,9 @@ public class Encounter {
         return player;
     }
 
-    public void enemyDealsDamage(Result result) {
+    public void enemyTakesTurn(Result result) {
         if (result.isPiercing()) {
             player.setHp(player.getHp() - result.getDamage());
-            if (player.getHp() <= 0) {
-                playerLoses();
-                return;
-            }
         } else {
             int overflow = result.getDamage() - player.getShield();
             if (overflow > 0) {
@@ -59,18 +48,81 @@ public class Encounter {
                 player.setShield(player.getShield() - result.getDamage());
             }
         }
-        if (player.getHp() <= 0) {
-            playerLoses();
-            return;
+    }
+
+    public boolean enemyHasLife() {
+
+        //System.out.println(String.format("%s has been annihilated!", enemy.getName()));
+        return enemy.getHp() > 0;
+    }
+
+    public boolean playerHasLife() {
+        //System.out.println(String.format("%s has failed in their quest...", player.getName()));
+
+        return player.getHp() > 0;
+
+    }
+
+    public void performCombat() {
+
+        //pause(1100);
+        if (player.getInitiative() - enemy.getIntitative() > 0) {
+            playerGoesFirst();
+        } else {
+            enemyGoesFirst();
         }
     }
 
-    public void playerWins() {
-        System.out.println(String.format("%s has been annihilated!", enemy.getName()));
+    public void playerGoesFirst() {
+        System.out.println(player.printHand());
+
+        Result r = player.roll(player.getPlayerInput());
+        playerTakesTurn(r);
+
+        System.out.println(r);
+        if (!enemyHasLife()) {
+            System.out.println("The " + enemy.getName() + " has been destroyed");
+            return;
+        }
+
+        System.out.println(player);
+        System.out.println(enemy);
+        System.out.println("The " + enemy.getName() + " makes it´s turn.");
+        r = enemy.roll();
+        enemyTakesTurn(r);
+        System.out.println(r);
+        System.out.println(player);
+        System.out.println(enemy);
+        if (!playerHasLife()) {
+            System.out.println("You have failed in your quest");
+        }
     }
 
-    public void playerLoses() {
-        System.out.println(String.format("%s has failed in their quest...", player.getName()));
+    public void enemyGoesFirst() {
+        System.out.println("The " + enemy.getName() + " makes it´s turn.");
+        Result r = enemy.roll();
+        enemyTakesTurn(r);
+
+        System.out.println(r);
+
+        System.out.println(enemy);
+        System.out.println(player);
+
+        if (!playerHasLife()) {
+            System.out.println("You have failed in your quest");
+            return;
+        }
+
+        System.out.println(player.printHand());
+
+        r = player.roll(player.getPlayerInput());
+        playerTakesTurn(r);
+        System.out.println(r);
+        System.out.println(player);
+        System.out.println(enemy);
+        if (!enemyHasLife()) {
+            System.out.println("The " + enemy.getName() + " has been destroyed");
+        }
     }
 
 }

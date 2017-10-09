@@ -2,6 +2,7 @@ package entity.player;
 
 import dice.*;
 import result.Result;
+import util.Input;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,16 +44,16 @@ public class Player {
             case 2:
             case 3:
             case 9:
-                return new Attack(rnd.nextInt(4) + 1);
+                return new Attack(rnd.nextInt(3) + 2);
             case 4:
                 return new Crit();
             case 5:
-                return new Healing(rnd.nextInt(7) + 1);
+                return new Healing(rnd.nextInt(3) + 1);
             case 6:
                 return new Piercing();
             case 7:
             case 8:
-                return new Shielding(rnd.nextInt(4) + 1);
+                return new Shielding(rnd.nextInt(3) + 1);
             default:
                 return null;
         }
@@ -145,10 +146,10 @@ public class Player {
 
     public String printHand() {
         StringBuilder sb = new StringBuilder("\n");
-        // TODO: 10/6/2017 Bolja imena za varijable da se lakse cita
-        hand.forEach((d) -> {
-            sb.append(d.toString()).append("\n");
-        });
+        int i = 1;
+        for (Dice d : hand) {
+            sb.append(i++).append("\n").append(d.toString()).append("\n");
+        }
         return sb.toString();
     }
 
@@ -164,21 +165,27 @@ public class Player {
         for (int i = 0; i < 3; i++) {
             sides.add(selectedDice.get(i).getSides().get(rnd.nextInt(6)));
         }
-
-        System.out.println("Printing sides");
+        Result r = new Result();
         for (Side s : sides) {
-            System.out.println(String.format("%s :%s", s.getDesc(), s.getValue() == -1 ? " " : s.getValue()));
+            s.accept(r);
         }
+        return r;
+    }
 
-        // TODO: 10/6/2017 AA: Ovdje "Result result = new Result(); foreach side.accept(result)...
-        return new Result(sides);
+    public List<Dice> getPlayerInput() {
+        List<Dice> selectedDice = new ArrayList<>();
+        System.out.println("Choose first dice");
+        selectedDice.add(hand.get(Input.readInt() - 1));
+        System.out.println("Choose second dice");
+        selectedDice.add(hand.get(Input.readInt() - 1));
+        System.out.println("Choose third dice");
+        selectedDice.add(hand.get(Input.readInt() - 1));
+        return selectedDice;
     }
 
     @Override
     public String toString() {
-        // TODO: 10/6/2017 Ne znam jel dobro ime za varijablu, ne kontam bas sta je
-        String hand = this.hand.isEmpty() ? "no dice" : printHand();
-        return String.format("%s with %s hp, %s armor and %s in hand", name, hp, shield, hand);
+        return String.format("%s with %s hp, %s armor", name, hp, shield);
     }
 
 }

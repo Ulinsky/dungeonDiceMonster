@@ -1,6 +1,8 @@
 package entity.enemy;
 
 import dice.Dice;
+import dice.Side;
+import result.Result;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,6 +17,7 @@ public abstract class Enemy {
     private List<Dice> dice;
     private List<Dice> hand;
     private int intitative;
+    Random rnd;
 
     public Enemy(String name, int hp, int shield, int intitative) {
         this.name = name;
@@ -24,7 +27,9 @@ public abstract class Enemy {
         this.intitative = intitative;
         this.dice = new ArrayList<>();
         this.hand = new ArrayList<>();
+        rnd = new Random();
         generateDice();
+
     }
 
     public String getName() {
@@ -69,7 +74,6 @@ public abstract class Enemy {
     }
 
     public void drawDice() {
-        Random rnd = new Random();
         shuffleDice();
         if (hand != null) {
             hand.forEach((Dice d) -> {
@@ -91,7 +95,7 @@ public abstract class Enemy {
 
     @Override
     public String toString() {
-        return String.format("%s with %s hp, %s armor and %s in hand", name, hp, shield, hand.isEmpty() ? "no dice" : printHand());
+        return String.format("%s with %s hp, %s armor", name, hp, shield);
     }
 
     public void addDice(Dice dice) {
@@ -99,4 +103,20 @@ public abstract class Enemy {
     }
 
     abstract List<Dice> generateDice();
+
+    public Result roll() {
+        if (hand == null) {
+            throw new IllegalStateException("No dice in hand.");
+        }
+        List<Side> sides = new ArrayList<>();
+        int[] numbers = new Random().ints(0, 5).distinct().limit(3).toArray();
+        for (int i = 0; i < 3; i++) {
+            sides.add(hand.get(numbers[i]).getSides().get(rnd.nextInt(6)));
+        }
+       /* System.out.println("Printing sides");
+        for (Side s : sides) {
+            System.out.println(String.format("%s :%s", s.getDesc(), s.getValue() == -1 ? " " : s.getValue()));
+        }*/
+        return new Result(sides);
+    }
 }

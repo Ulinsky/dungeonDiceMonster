@@ -3,8 +3,6 @@ package result;
 import dice.*;
 import visitor.Visitor;
 
-import java.util.List;
-
 public class Result implements Visitor {
 
     private int damage = 0;
@@ -12,14 +10,6 @@ public class Result implements Visitor {
     private int shield = 0;
     private boolean piercing = false;
     private boolean crit = false;
-
-
-    public Result(List<Side> sides) {
-        // TODO: 10/6/2017 Kod da visitable accepta visitor ne bi trebao biti u visitoru vec van. Tako da ti ne treba constructor nikako
-        for (Side s : sides) {
-            s.accept(this);
-        }
-    }
 
 
     public boolean isPiercing() {
@@ -44,7 +34,7 @@ public class Result implements Visitor {
 
     @Override
     public String toString() {
-        return String.format("\nA dice with %s damage,%s healing %s shielding, %s and %s", getDamage(), healing, shield, crit ? "crit" : "no crit", piercing ? "pierce." : "no pierce.");
+        return String.format("It did %s damage,%s healing %s shielding! \n%S \n%s", getDamage(), healing, shield, crit && damage > 0 ? "A critical strike!" : " ", piercing && damage > 0 ? "The damage pierced the enemy´s defences." : "");
     }
 
     @Override
