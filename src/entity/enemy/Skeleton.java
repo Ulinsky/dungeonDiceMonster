@@ -6,36 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Skeleton extends Enemy {
+public final class Skeleton extends Enemy {
 
     public Skeleton() {
         super("Skeleton", 10, 15, 30);
         super.setDice(generateDice());
     }
 
-    public String getName() {
-        return super.getName();
+    @Override
+    public void setHp(int hp) {
+        super.setHp(hp);
     }
 
-    public int getHp() {
-        return super.getHp();
-    }
-
-    public int getShield() {
-        return super.getShield();
-    }
-
-
-    public List<Dice> getHand() {
-        return super.getHand();
-    }
-
-    public int getIntitative() {
-        return super.getIntitative();
-    }
-
-    public void addDice(Dice dice) {
-        super.addDice(dice);
+    @Override
+    public void setShield(int shield) {
+        super.setShield(shield);
     }
 
     @Override

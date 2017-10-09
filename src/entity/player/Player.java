@@ -44,16 +44,16 @@ public class Player {
             case 2:
             case 3:
             case 9:
-                return new Attack(rnd.nextInt(3) + 2);
+                return new Attack(rnd.nextInt(5) + 2);
             case 4:
                 return new Crit();
             case 5:
-                return new Healing(rnd.nextInt(3) + 1);
+                return new Healing(rnd.nextInt(4) + 2);
             case 6:
                 return new Piercing();
             case 7:
             case 8:
-                return new Shielding(rnd.nextInt(3) + 1);
+                return new Shielding(rnd.nextInt(5) + 2);
             default:
                 return null;
         }
@@ -78,7 +78,7 @@ public class Player {
     public Player() {
         rnd = new Random();
         this.hp = 20;
-        this.shield = 0;
+        this.shield = 5;
         // this.inventory = new Inventory();
         this.initiative = 10;
         this.dice = new ArrayList<>();
@@ -93,7 +93,7 @@ public class Player {
     public void setHp(int hp) {
         this.hp = hp;
         if (this.hp > 20) {
-            hp = 20;
+            this.hp = 20;
         }
     }
 
@@ -104,7 +104,7 @@ public class Player {
     public void setShield(int shield) {
         this.shield = shield;
         if (this.shield > 10) {
-            shield = 10;
+            this.shield = 10;
         }
     }
 

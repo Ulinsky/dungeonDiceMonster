@@ -25,6 +25,8 @@ public class Encounter {
                 enemy.setShield(enemy.getShield() - result.getDamage());
             }
         }
+        player.setHp(player.getHp() + result.getHealing());
+        player.setShield(player.getShield() + result.getShield());
 
     }
 
@@ -48,6 +50,9 @@ public class Encounter {
                 player.setShield(player.getShield() - result.getDamage());
             }
         }
+        enemy.setHp(enemy.getHp() + result.getHealing());
+        enemy.setShield(enemy.getShield() + result.getShield());
+
     }
 
     public boolean enemyHasLife() {
@@ -66,7 +71,7 @@ public class Encounter {
     public void performCombat() {
 
         //pause(1100);
-        if (player.getInitiative() - enemy.getIntitative() > 0) {
+        if (player.getInitiative() - enemy.getInitiative() > 0) {
             playerGoesFirst();
         } else {
             enemyGoesFirst();

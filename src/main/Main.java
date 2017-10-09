@@ -16,7 +16,7 @@ public class Main {
         Encounter e = new Encounter(player, skeleton);
         System.out.println(player);
         System.out.println(String.format("A %s blocks your way!", e.getEnemy().getName()));
-        pause(800);
+
         System.out.println(skeleton);
         while (e.playerHasLife() && e.enemyHasLife()) {
             e.performCombat();
@@ -24,12 +24,5 @@ public class Main {
         System.out.println("Combat has ended");
     }
 
-    public static void pause(long l) {
-        try {
-            Thread.sleep(l);
-        } catch (InterruptedException e1) {
-            e1.printStackTrace();
-        }
-    }
 
 }

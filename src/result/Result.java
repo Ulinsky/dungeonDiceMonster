@@ -34,7 +34,7 @@ public class Result implements Visitor {
 
     @Override
     public String toString() {
-        return String.format("It did %s damage,%s healing %s shielding! \n%S \n%s", getDamage(), healing, shield, crit && damage > 0 ? "A critical strike!" : " ", piercing && damage > 0 ? "The damage pierced the enemy´s defences." : "");
+        return String.format("It did %s damage,%s healing %s shielding. \n%S \n%s", getDamage(), healing, shield, crit && damage > 0 ? "A critical strike!" : " ", piercing && damage > 0 ? "The damage pierced the enemy´s defences." : "");
     }
 
     @Override

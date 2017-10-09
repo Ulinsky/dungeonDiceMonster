@@ -16,15 +16,18 @@ public abstract class Enemy {
     private int shield;
     private List<Dice> dice;
     private List<Dice> hand;
-    private int intitative;
+    private int initiative;
+    private final int maxHp;
+    private final int maxShield;
     Random rnd;
 
-    public Enemy(String name, int hp, int shield, int intitative) {
+    public Enemy(String name, int hp, int shield, int initiative) {
         this.name = name;
         this.hp = hp;
+        this.maxHp = hp;
+        this.maxShield = shield;
         this.shield = shield;
-        this.dice = dice;
-        this.intitative = intitative;
+        this.initiative = initiative;
         this.dice = new ArrayList<>();
         this.hand = new ArrayList<>();
         rnd = new Random();
@@ -42,10 +45,16 @@ public abstract class Enemy {
 
     public void setHp(int hp) {
         this.hp = hp;
+        if (this.hp > maxHp) {
+            this.hp = maxHp;
+        }
     }
 
     public void setShield(int shield) {
         this.shield = shield;
+        if (this.shield > maxShield) {
+            this.shield = maxShield;
+        }
     }
 
     public int getShield() {
@@ -57,8 +66,8 @@ public abstract class Enemy {
         return hand;
     }
 
-    public int getIntitative() {
-        return intitative;
+    public int getInitiative() {
+        return initiative;
     }
 
     public String printHand() {
@@ -113,10 +122,10 @@ public abstract class Enemy {
         for (int i = 0; i < 3; i++) {
             sides.add(hand.get(numbers[i]).getSides().get(rnd.nextInt(6)));
         }
-       /* System.out.println("Printing sides");
+        Result r = new Result();
         for (Side s : sides) {
-            System.out.println(String.format("%s :%s", s.getDesc(), s.getValue() == -1 ? " " : s.getValue()));
-        }*/
-        return new Result(sides);
+            s.accept(r);
+        }
+        return r;
     }
 }
