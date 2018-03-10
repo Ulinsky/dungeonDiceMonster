@@ -1,9 +1,8 @@
 package dice;
 
-import visitor.Element;
 import visitor.Visitor;
 
-public abstract class Side implements Element {
+public abstract class Side {
     public abstract int getValue();
 
     public abstract String getDesc();

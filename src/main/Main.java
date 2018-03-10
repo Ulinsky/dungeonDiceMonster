@@ -16,13 +16,10 @@ public class Main {
         Encounter e = new Encounter(player, skeleton);
         System.out.println(player);
         System.out.println(String.format("A %s blocks your way!", e.getEnemy().getName()));
-
         System.out.println(skeleton);
         while (e.playerHasLife() && e.enemyHasLife()) {
             e.performCombat();
         }
         System.out.println("Combat has ended");
     }
-
-
 }
